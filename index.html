@@ -13,10 +13,9 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
         /* Header */
@@ -71,42 +70,94 @@
             cursor: pointer;
         }
 
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
+                .banner {
+            height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            color: #2c3e50;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: white;
             position: relative;
             overflow: hidden;
         }
 
-        .hero::before {
+        .banner::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(255, 255, 255, 0.1);
-            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
         }
 
-        .hero-content {
+        .banner-content {
             position: relative;
             z-index: 2;
             max-width: 800px;
-            padding: 2rem;
+            padding: 0 2rem;
         }
 
-        .profile-image {
-            width: 200px;
-            height: 200px;
+        .banner h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .banner p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+            line-height: 1.6;
+        }
+
+        /* Floating elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            border: 5px solid #2c3e50;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 120px;
+            height: 120px;
+            top: 60%;
+            right: 15%;
+            animation-delay: -2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 60px;
+            height: 60px;
+            bottom: 30%;
+            left: 20%;
+            animation-delay: -4s;
+        }
+       
+
+        .profile-image {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            border: 5px solid #343231;
             margin: 0 auto 2rem;
             background: white;
             display: flex;
@@ -121,33 +172,11 @@
         .profile-image:hover {
             transform: scale(1.05);
         }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-            text-shadow: none;
-            color: #2c3e50;
-        }
-
-        .hero .subtitle {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            color: #34495e;
-            font-weight: 500;
-        }
-
-        .hero p {
-            font-size: 1.1rem;
-            margin-bottom: 2rem;
-            line-height: 1.8;
-            color: #5a6c7d;
-        }
-
+        
         .cta-button {
             display: inline-block;
             padding: 15px 30px;
-            background: #2c3e50;
+            background: #343231;
             color: white;
             text-decoration: none;
             border-radius: 5px;
@@ -219,7 +248,7 @@
 
         .card-image {
             height: 200px;
-            background: linear-gradient(135deg, #2c3e50, #34495e);
+            background: linear-gradient(135deg, #667eea, #764ba2);;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -275,26 +304,31 @@
             color: #34495e;
         }
 
-        /* Contact Section */
-        .contact {
-            padding: 100px 2rem;
-            background: #2c3e50;
+       /* Contact section */
+        .contact-section {
+            background: #191919;
+            padding: 5rem 0;
             color: white;
         }
 
-        .contact-content {
+        .contact-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            max-width: 1200px;
-            margin: 0 auto;
+            align-items: center;
         }
 
         .contact-form {
             background: rgba(255, 255, 255, 0.1);
-            padding: 2rem;
-            border-radius: 15px;
             backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .contact-form h2 {
+            margin-bottom: 2rem;
+            font-size: 2rem;
         }
 
         .form-group {
@@ -310,12 +344,13 @@
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 12px;
+            padding: 1rem;
             border: none;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
             color: white;
             font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
         .form-group input::placeholder,
@@ -323,74 +358,104 @@
             color: rgba(255, 255, 255, 0.7);
         }
 
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
         .submit-btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            color: white;
+            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 1rem 2rem;
             border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
+            border-radius: 25px;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
         }
 
         .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
         }
 
         .contact-info {
+            text-align: center;
+        }
+
+        .contact-info h2 {
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .contact-methods {
             display: flex;
             flex-direction: column;
             gap: 2rem;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
+        .contact-method {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
             backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            transition: all 0.3s ease;
         }
 
-        .contact-icon {
-            width: 50px;
-            height: 50px;
+        .contact-method:hover {
             background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
+            transform: translateY(-5px);
+        }
+
+        .contact-method i {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .contact-method h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-method a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .contact-method a:hover {
+            color: #ffd700;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
         }
 
         .social-links {
             display: flex;
+            justify-content: center;
             gap: 1rem;
-            margin-top: 2rem;
+            margin-bottom: 1rem;
         }
 
-        .social-link {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .social-links a {
             color: white;
-            text-decoration: none;
+            font-size: 1.5rem;
             transition: all 0.3s ease;
         }
 
-        .social-link:hover {
-            background: rgba(255, 255, 255, 0.3);
+        .social-links a:hover {
+            color: #ffd700;
             transform: translateY(-3px);
         }
+
+
 
         /* Responsive Design */
         @media (max-width: 768px) {
@@ -443,6 +508,47 @@
         .hero-content > *:nth-child(3) { animation-delay: 0.6s; }
         .hero-content > *:nth-child(4) { animation-delay: 0.8s; }
         .hero-content > *:nth-child(5) { animation-delay: 1s; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .banner h1 {
+                font-size: 2.5rem;
+            }
+
+            .banner p {
+                font-size: 1.2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .education-card {
+                padding: 2rem;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -458,19 +564,29 @@
         </nav>
     </header>
 
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="profile-image">
-                <img src="images/profile.jpeg" alt="Richa Singh" style="width: 100%; height: 100%; border-radius: 50%;">
+    <section class="banner" id="home">
+            <div class="floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
+            <div class="banner-content">
+                <br><br>
+                <div class="profile-image">
+                <img src="images/profile2.jpeg" alt="Richa Singh" style="width: 100%; height: 100%; border-radius: 50%;">
             </div>
             <h1>Hi, I'm Richa Singh</h1>
             <div class="subtitle">AI Intern</div>
+            <br>
             <p>Machine learning enthusiast with a strong background in AI.<br />
                I aim to leverage my technical skills and creativity to solve real-world problems<br />
                and enhance my professional growth in this field.</p>
+            <br><br><br>
             <a href="#portfolio" class="cta-button">Explore My Work</a>
-        </div>
+            </div>
     </section>
+
+    
 
     <section id="portfolio" class="portfolio">
         <div class="container">
@@ -511,65 +627,77 @@
                         <a href="certifications.html" class="card-link">View Certifications →</a>
                     </div>
                 </div>
+
+                <div class="portfolio-card">
+                    <div class="card-image">📖</div>
+                    <div class="card-content">
+                        <h3 class="card-title">Blogs</h3>
+                        <p class="card-description">Check out my technical blogs on Medium</p>
+                        <a href="https://medium.com/@wricha.singh01" class="card-link">View Blogs →</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-content">
-                <div class="contact-form">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" placeholder="Your Name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="your.email@example.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
-                        </div>
-                        <button type="submit" class="submit-btn">Send Message</button>
-                    </form>
-                </div>
-
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <div class="contact-icon">📧</div>
-                        <div>
-                            <h4>Email</h4>
-                            <p>wricharicha@gmail.com</p>
-                        </div>
+    <!-- Contact Section -->
+        <section class="contact-section" id="contact">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-form">
+                        <h2>Get in Touch</h2>
+                        <form>
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" name="name" placeholder="Your name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="Your email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" rows="5" placeholder="Your message" required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
                     </div>
 
-                    <div class="contact-item">
-                        <div class="contact-icon">📱</div>
-                        <div>
-                            <h4>Phone</h4>
-                            <p>+977 9819350247</p>
+                    <div class="contact-info">
+                        <h2>Contact Information</h2>
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <i>📧</i>
+                                <h3>Email</h3>
+                                <a href="mailto:wricharicha@gmail.com">wricharicha@gmail.com</a>
+                            </div>
+                            <div class="contact-method">
+                                <i>📱</i>
+                                <h3>Phone</h3>
+                                <span>9819350247</span>
+                            </div>
+                            <div class="contact-method">
+                                <i>🏠</i>
+                                <h3>Address</h3>
+                                <span>Dillibazar<br>Kathmandu, Nepal</span>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="contact-item">
-                        <div class="contact-icon">📍</div>
-                        <div>
-                            <h4>Location</h4>
-                            <p>Dillibazar, Kathmandu</p>
-                        </div>
-                    </div>
-
-                    <div class="social-links">
-                        <a href="https://www.linkedin.com/in/richa-singh-a28059268/" class="social-link" title="LinkedIn">💼</a>
-                        <a href="https://github.com/Wricha" class="social-link" title="GitHub">💻</a>
-                        <a href="https://www.instagram.com/wricharicha/?hl=en" class="social-link" title="Instagram">📷</a>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="social-links">
+                    <a href="https://www.instagram.com/wricharicha/?hl=en" target="_blank">📷</a>
+                    <a href="https://github.com/Wricha" target="_blank">💻</a>
+                    <a href="https://www.linkedin.com/in/richa-singh-a28059268/" target="_blank">💼</a>
+                </div>
+                <p>&copy; 2025 Richa Singh. All rights reserved.</p>
+            </div>
+        </footer>
     </section>
 
     <script>
